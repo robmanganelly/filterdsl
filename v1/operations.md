@@ -9,7 +9,7 @@ Understanding the signature of an operation is crucial for composing complex que
 
 An operation needs to specify the following:
 
-- **Kind** The kind of the operation, which indicates what operators are applicable
+- **Kind** The kind of the operation, which indicates what operators are applicable. See [Kind](./kind.md)
 - **Operator** The specific operator that the operation represents, see [Operators](./operators.md)
 - **Operand** The operand(s) that the operation acts upon, always values of the supported types
 - **Field** The field in the data that the operation targets, which determines where the operation is applied
