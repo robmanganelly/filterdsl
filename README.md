@@ -36,3 +36,4 @@ Early-stage. API and syntax may evolve.
 ### Sections
 
 - [Operators](./v1/operators.md)
+- [Operations](./v1/operations.md)
