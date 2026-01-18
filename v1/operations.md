@@ -13,6 +13,7 @@ An operation needs to specify the following:
 - **Operator** The specific operator that the operation represents, see [Operators](./operators.md)
 - **Operand** The operand(s) that the operation acts upon, always values of the supported types
 - **Field** The field in the data that the operation targets, which determines where the operation is applied
+- **Group** The group to which the operation belongs, allowing for logical grouping of operations within a [Query](./queries.md). This enables combining multiple operations under a single logical unit. Unlike the rest of the fields, the group is optional. If not provided, the implementation must assign the operation to a default group.
 
 No matter the transport mechanism, or any serialization format used, valid implementations of the FilterDSL must ensure that this signature is preserved and correctly interpreted.
 Some implementations might add other fields to this signature for additional metadata or functionality, but the core signature must remain intact.
