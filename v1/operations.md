@@ -2,10 +2,9 @@
 
 This section describes the various operations available in the FilterDSL. Each operation can be used to manipulate and query data in different ways
 
-
 ## The Signature of an Operation
 
-Each operation in the FilterDSL has a specific signature that defines the types of inputs it accepts and the type of output it produces. 
+Each operation in the FilterDSL has a specific signature that defines the types of inputs it accepts and the type of output it produces.
 Understanding the signature of an operation is crucial for composing complex queries and ensuring type safety in your data manipulations.
 
 An operation needs to specify the following:
