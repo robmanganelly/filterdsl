@@ -91,3 +91,29 @@ Extensible groups: Some groups can be used to extend other groups, allowing for 
     A set operand X intersects with set operand Y if they share at least one common element.
   - `nint` : Not Intersection
     A set operand X does not intersect with set operand Y if they share no common elements.
+- **String**
+  Applicable to string operands.
+  - `cn` : Contains
+    A string operand X contains string operand Y if Y is a substring of X.
+  - `ncn` : Not Contains
+    A string operand X does not contain string operand Y if Y is not a substring of X.
+  - `st` : Starts With
+    A string operand X starts with string operand Y if X begins with Y.
+  - `nst` : Not Starts With
+    A string operand X does not start with string operand Y if X does not begin with Y.
+  - `end` : Ends With
+    A string operand X ends with string operand Y if X ends with Y.
+  - `nend` : Not Ends With
+    A string operand X does not end with string operand Y if X does not end with Y.
+  - `icn` : Case Insensitive Contains
+    A string operand X contains string operand Y if Y is a substring of X, ignoring case.
+  - `nicn` : Case Insensitive Not Contains
+    A string operand X does not contain string operand Y if Y is not a substring of X, ignoring case.
+  - `ist` : Case Insensitive Starts With
+    A string operand X starts with string operand Y if X begins with Y, ignoring case.
+  - `nist` : Case Insensitive Not Starts With
+    A string operand X does not start with string operand Y if X does not begin with Y, ignoring case.
+  - `iend` : Case Insensitive Ends With
+    A string operand X ends with string operand Y if X ends with Y, ignoring case.
+  - `niend` : Case Insensitive Not Ends With
+    A string operand X does not end with string operand Y if X does not end with Y, ignoring case.
