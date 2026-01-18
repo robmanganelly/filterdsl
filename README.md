@@ -37,4 +37,5 @@ Early-stage. API and syntax may evolve.
 
 - [Operators](./v1/operators.md)
 - [Operations](./v1/operations.md)
+  - [Kind](./v1/kind.md)
 - [Queries](./v1/queries.md)
