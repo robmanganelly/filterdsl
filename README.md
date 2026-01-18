@@ -41,8 +41,8 @@ Let's look for **elements where the age is between 30 and 40, and the name is "J
 
 ```json
 {
-  "operations": [
-    {
+  "operations": {
+    "0": {
       "kind": "Range",
       "field": "age",
       "operator": "bt",
@@ -51,13 +51,13 @@ Let's look for **elements where the age is between 30 and 40, and the name is "J
         "to": 40
       }
     },
-    {
+    "1": {
       "kind": "String",
       "field": "name",
       "operator": "eq",
       "operand": "John"
     }
-  ],
+  },
   "meta": {
     "count": 2,
     "version": "1.0"
@@ -69,34 +69,30 @@ Or we can search for **elements where the age is greater than 25, and the name i
 
 ```json
 {
-  "operations": [
-    {
+  "operations": {
+    "0": {
       "kind": "Numeric",
       "field": "age",
       "operator": "gt",
       "operand": 25
     },
-    {
+    "1": {
       "kind": "String",
       "field": "name",
       "operator": "eq",
       "operand": "Jane"
     },
-    {
-      "kind": "Numeric",
-      "field": "age",
-      "operator": "gt",
-      "operand": 25,
-      "group": "1"
-    },
-    {
+    "2": {
       "kind": "String",
       "field": "name",
       "operator": "eq",
       "operand": "John",
-      "group": "1"
-    }
-  ],
+    },
+  },
+  "groups": {
+    "0": ["0", "1"],
+    "1": ["0", "2"]
+  },
   "meta": {
     "count": 4,
     "version": "1.0"
@@ -104,7 +100,12 @@ Or we can search for **elements where the age is greater than 25, and the name i
 }
 ```
 
-The string used to group the operations does not follow any specific format and is intended to be an opaque identifier that groups related operations together. Implementations may define additional validation rules such as maxlength or allowed characters.
+groups are optional and defined as a mapping from group identifiers to arrays of operation identifiers. Each group represents a logical combination of operations that can be evaluated together. Implementations may use these groups to optimize query execution or to apply logical operators such as AND/OR to the grouped operations.
+
+There is no special meaning to the group identifiers themselves; they are opaque strings used to reference sets of operations.
+The same applies to the group identifiers used within the `groups` mapping; they are simply references to sets of operations and do not carry any inherent meaning.
+
+Implementations may enforce additional constraints on group identifiers, such as maximum length or allowed characters, but these constraints are not defined by the FilterDSL specification itself.
 
 ## Error Handling
 
@@ -112,8 +113,10 @@ Our recommendation is to only return errors when the filter query is invalid acc
 
 - Unknown operators
 - Invalid operand types
+- Malformed operation map (duplicated operation identifiers)
 - Malformed range objects
-- Invalid group identifiers
+- Malformed group definitions
+- Malformed metadata definition
 
 Errors should be descriptive enough to allow clients to correct their queries without exposing internal implementation details.
 We recommend attaching an error code or identifier to each error to facilitate programmatic handling by clients.

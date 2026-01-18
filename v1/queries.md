@@ -4,11 +4,27 @@ A query in FilterDSL is a composition of one or more operations that together de
 
 ## Structure of a Query
 
-- A query is composed of one or more [operations](./operations.md).
-- Operations can be grouped using the **group** field of an operation, allowing multiple operations to be combined under a single logical unit within the query. If an operation does not specify a group, it is assigned to a default group by the implementation.
-- Inside a group, each operation must target a specific field in the data. It is recommended that the implementations define ways to alias fields in the database to prevent leaking internal schema details. However, alias should not be used to bypass the constraint of uniqueness of field names within a group.
-- Operations inside a groups are evaluated as a logical `AND` , meaning that all operations in the group must be satisfied for the group to be considered true.
-- When a query contains multiple groups, the groups are evaluated as a logical `OR`, meaning that if any group evaluates to true, the entire query is considered true.
+A query is represented as a JSON object with the following structure:
+
+- `operations`: A mapping of operation identifiers to operation objects. Each operation object defines a specific filter criterion.
+- `groups` (optional): A mapping of group identifiers to arrays of operation identifiers. Each group represents a logical combination of operations that can be evaluated together.
+- `meta`: Metadata about the query, including the number of operations and the version of the FilterDSL specification.
+
+## Group Specification
+
+> Future versions may introduce a different group structure to enable more complex logical combinations beyond the current AND/OR semantics.
+
+Groups are optional and defined as a mapping from group identifiers to arrays of operation identifiers. Each group represents a logical combination of operations that can be evaluated together. Implementations may use these groups to optimize query execution or to apply logical operators such as AND/OR to the grouped operations.
+
+There is no special meaning to the group identifiers themselves; they are opaque strings used to reference sets of operations.
+The same applies to the group identifiers used within the `groups` mapping; they are simply references to sets of operations and do not carry any inherent meaning.
+
+Implementations may enforce additional constraints on group identifiers, such as maximum length or allowed characters, but these constraints are not defined by the FilterDSL specification itself.
+
+Operations inside a group are evaluated as a logical `AND`, meaning that all operations in the group must be satisfied for the group to be considered true.
+When a query contains multiple groups, the groups are evaluated as a logical `OR`, meaning that if any group evaluates to true, the entire query is considered true.
+
+Inside a group, each operation must target a specific field in the data. It is recommended that the implementations define ways to alias fields in the database to prevent leaking internal schema details. However, alias should not be used to bypass the constraint of uniqueness of field names within a group.
 
 ## Query metadata
 
