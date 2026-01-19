@@ -102,7 +102,7 @@ Or we can search for **elements where the age is greater than 25, and the name i
 
 groups are optional and defined as a mapping from group identifiers to arrays of operation identifiers. Each group represents a logical combination of operations that can be evaluated together. Implementations may use these groups to optimize query execution or to apply logical operators such as AND/OR to the grouped operations.
 
-There is no special meaning to the group identifiers themselves; they are opaque strings used to reference sets of operations.
+There is no special meaning to the operation identifiers themselves; they are opaque strings used to reference sets of operations.
 The same applies to the group identifiers used within the `groups` mapping; they are simply references to sets of operations and do not carry any inherent meaning.
 
 Implementations may enforce additional constraints on group identifiers, such as maximum length or allowed characters, but these constraints are not defined by the FilterDSL specification itself.
